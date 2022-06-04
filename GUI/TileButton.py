@@ -11,9 +11,18 @@ class TileButton(QPushButton):
         self.game = game
         self.setStyleSheet("QPushButton {"
                            "border-style: none;"
+                           "background-color: white;"
                            "}")
         self.setText("*")
         self.clicked.connect(self.on_click)
+        self.setToolTip(str(self.position))
 
+    # TODO Adding organisms
     def on_click(self):
-        print("dupa "+str(self.position.getX())+" "+str(self.position.getY()))
+        print(self.position)
+
+    def get_position(self):
+        return self.position
+
+    def get_game(self):
+        return self.game

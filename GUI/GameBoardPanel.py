@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
+from PyQt5.Qt import *
 
 from GUI.TileButton import TileButton
 from GameLogic.Systems.Point import Point
@@ -10,12 +11,13 @@ class GameBoardPanel(QWidget):
         super(GameBoardPanel, self).__init__()
         self.game = game
         self.layout = QGridLayout()
-        self.layout.setHorizontalSpacing(0)
-        self.layout.setVerticalSpacing(0)
+        self.layout.setSpacing(0)
+        self.size = 50
 
-        for i in range(80):
-            for j in range(80):
+        for i in range(self.size):
+            for j in range(self.size):
                 button = TileButton(Point(j, i), self.game)
+                button.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
                 self.layout.addWidget(button, i, j)
 
         self.setLayout(self.layout)
