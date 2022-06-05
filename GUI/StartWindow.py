@@ -1,0 +1,41 @@
+from PyQt5.Qt import *
+
+
+class StartWindow(QWidget):
+    def __init__(self):
+        super(StartWindow, self).__init__()
+        self.layout = QVBoxLayout()
+
+        self.width = QSlider(Qt.Horizontal)
+        self.width_label = QLabel(f'Size: {self.width.value()}x{self.width.value()}')
+        self.width_widget = QWidget()
+        self.width_layout = QHBoxLayout()
+
+        self.new_game_button = QPushButton("New game")
+        self.load_game_button = QPushButton("Load game")
+        self.button_layout = QHBoxLayout()
+        self.button_widget = QWidget()
+        self.set_ui()
+
+    def set_ui(self):
+        self.setWindowTitle("Patryk Korczak - 188618 - Computer Science")
+
+        self.width.setRange(10, 80)
+        self.width_layout.addWidget(self.width_label)
+        self.width_layout.addWidget(self.width)
+        self.width_widget.setLayout(self.width_layout)
+
+        self.button_layout.addWidget(self.new_game_button)
+        self.button_layout.addWidget(self.load_game_button)
+        self.button_widget.setLayout(self.button_layout)
+
+        self.layout.addWidget(self.width_widget)
+        self.layout.addWidget(self.button_widget)
+
+        self.width.valueChanged.connect(lambda:
+                                        self.width_label.setText(f'Size: {self.width.value()}x{self.width.value()}'))
+        self.new_game_button.clicked.connect(lambda: print("new game"))
+        self.load_game_button.clicked.connect(lambda: print("load game"))
+
+        self.setLayout(self.layout)
+        self.setFixedSize(300, 150)

@@ -1,5 +1,3 @@
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.Qt import *
 
@@ -13,7 +11,7 @@ class MenuPanel(QWidget):
         self.load_game_button = QPushButton("Load game")
         self.layout = QHBoxLayout()
         self.layout.setAlignment(Qt.AlignHCenter)
-        self.layout.setContentsMargins(0,0,0,0)
+        self.layout.setContentsMargins(0, 0, 0, 0)
 
         self.next_turn_button.clicked.connect(self.button_click)
         self.save_game_button.clicked.connect(self.button_click)
