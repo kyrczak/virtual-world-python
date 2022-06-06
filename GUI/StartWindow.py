@@ -25,6 +25,7 @@ class StartWindow(QWidget):
 
         self.width.setRange(10, 80)
         self.width.setValue(10)
+        self.width_label.setText(f'Size: {self.width.value()}x{self.width.value()}')
         self.width_layout.addWidget(self.width_label)
         self.width_layout.addWidget(self.width)
         self.width_widget.setLayout(self.width_layout)
@@ -43,6 +44,8 @@ class StartWindow(QWidget):
 
         self.setLayout(self.layout)
         self.setFixedSize(300, 150)
+
+    # TODO Load Game
 
     def start_game(self, size):
         game = Game(size, size)

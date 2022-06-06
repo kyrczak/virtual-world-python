@@ -66,7 +66,7 @@ class World:
             for org in self.to_add:
                 self.organisms.append(org)
             self.to_add.clear()
-        self.organisms.sort(key=lambda x: (x.initiative, x.age))
+        self.organisms.sort(key=lambda x: (-x.initiative, -x.age))
 
     def sort_organism(self):
         for org in self.organisms:

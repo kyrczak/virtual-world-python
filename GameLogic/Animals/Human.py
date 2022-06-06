@@ -44,7 +44,7 @@ class Human(Animal):
         return QColor(0, 0, 255)
 
     def move(self):
-        key :Keys = self.get_world().get_key()
+        key: Keys = self.get_world().get_key()
         if key is not Keys.DEFAULT and key is not Keys.KEY_F:
             proposed_position = self.proposed_position(key.value)
             if self.is_in_bounds(proposed_position):
@@ -83,7 +83,7 @@ class Human(Animal):
                 self.set_ability_time(5)
                 self.set_ability_active(False)
                 self.set_ability_cooldown(self.get_ability_cooldown()-1)
-        elif self.set_ability_active is False and self.get_ability_cooldown() < 5:
+        elif self.get_ability_active() is False and self.get_ability_cooldown() < 5:
             self.set_ability_cooldown(self.get_ability_cooldown()-1)
             if self.get_ability_cooldown() == 0:
                 self.set_ability_cooldown(5)

@@ -13,8 +13,8 @@ class MenuPanel(QWidget):
         self.layout.setAlignment(Qt.AlignHCenter)
         self.layout.setContentsMargins(0, 0, 0, 0)
 
-        self.next_turn_button.clicked.connect(self.button_click)
-        self.save_game_button.clicked.connect(self.button_click)
+        self.next_turn_button.clicked.connect(lambda: self.game.game_next_turn())
+        self.save_game_button.clicked.connect(self.save_function)
         self.load_game_button.clicked.connect(self.button_click)
 
         self.next_turn_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
@@ -30,6 +30,25 @@ class MenuPanel(QWidget):
     def button_click(self):
         print("test")
 
-    # TODO Next turn
-    #  Save game
+    def save_function(self):
+        panel = QWidget()
+        layout = QVBoxLayout()
+        label = QLabel("Please input save file name")
+        textbot = QLineEdit()
+        save_button = QPushButton("Save")
+
+        layout.addWidget(label)
+        layout.addWidget(textbot)
+        layout.addWidget(save_button)
+
+        save_button.clicked.connect(lambda: self.save_game(textbot.text(), panel))
+
+        panel.setLayout(layout)
+        panel.show()
+
+    def save_game(self, text, panel):
+        self.game.save_game(text)
+        print(text)
+        panel.close()
+    # TODO Save game
     #  Load game
