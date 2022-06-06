@@ -1,6 +1,8 @@
 from PyQt5.QtGui import *
 from PyQt5.Qt import *
 
+import GameLogic.Game
+
 
 class MenuPanel(QWidget):
     def __init__(self, game):
@@ -15,7 +17,7 @@ class MenuPanel(QWidget):
 
         self.next_turn_button.clicked.connect(lambda: self.game.game_next_turn())
         self.save_game_button.clicked.connect(self.save_function)
-        self.load_game_button.clicked.connect(self.button_click)
+        self.load_game_button.clicked.connect(self.load_game)
 
         self.next_turn_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.save_game_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
@@ -42,13 +44,17 @@ class MenuPanel(QWidget):
         layout.addWidget(save_button)
 
         save_button.clicked.connect(lambda: self.save_game(textbot.text(), panel))
-
         panel.setLayout(layout)
         panel.show()
+
+    def load_game(self):
+        file_name = QFileDialog.getOpenFileName(self)
+        print(file_name[0])
+        self.game.get_gui().close()
+        self.game = GameLogic.Game.Game()
+        self.game.load_game(file_name[0])
 
     def save_game(self, text, panel):
         self.game.save_game(text)
         print(text)
         panel.close()
-    # TODO Save game
-    #  Load game
