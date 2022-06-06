@@ -1,5 +1,8 @@
 from PyQt5.Qt import *
 
+from GUI.GameWindow import GameWindow
+from GameLogic.Game import Game
+
 
 class StartWindow(QWidget):
     def __init__(self):
@@ -21,6 +24,7 @@ class StartWindow(QWidget):
         self.setWindowTitle("Patryk Korczak - 188618 - Computer Science")
 
         self.width.setRange(10, 80)
+        self.width.setValue(10)
         self.width_layout.addWidget(self.width_label)
         self.width_layout.addWidget(self.width)
         self.width_widget.setLayout(self.width_layout)
@@ -34,8 +38,13 @@ class StartWindow(QWidget):
 
         self.width.valueChanged.connect(lambda:
                                         self.width_label.setText(f'Size: {self.width.value()}x{self.width.value()}'))
-        self.new_game_button.clicked.connect(lambda: print("new game"))
+        self.new_game_button.clicked.connect(lambda: self.start_game(self.width.value()))
         self.load_game_button.clicked.connect(lambda: print("load game"))
 
         self.setLayout(self.layout)
         self.setFixedSize(300, 150)
+
+    def start_game(self, size):
+        game = Game(size, size)
+        self.close()
+        game.get_gui().show()

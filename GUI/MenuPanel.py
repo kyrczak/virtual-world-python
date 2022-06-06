@@ -17,10 +17,14 @@ class MenuPanel(QWidget):
         self.save_game_button.clicked.connect(self.button_click)
         self.load_game_button.clicked.connect(self.button_click)
 
+        self.next_turn_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.save_game_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.load_game_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+
         self.layout.addWidget(self.next_turn_button, 1)
         self.layout.addWidget(self.save_game_button, 1)
         self.layout.addWidget(self.load_game_button, 1)
-
+        self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.setLayout(self.layout)
 
     def button_click(self):

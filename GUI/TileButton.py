@@ -10,12 +10,12 @@ class TileButton(QPushButton):
         self.position = point
         self.game = game
         self.color = QColor(0xFFFFFF)
-
+        self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.setStyleSheet("QPushButton {"
                            "border: 1px solid lightgray;"
                            f'background-color: rgb({self.color.red()}, {self.color.green()}, {self.color.blue()});'
                            "}")
-        self.setText("*")
+        self.setText(" ")
         self.clicked.connect(self.on_click)
         self.setToolTip(str(self.position))
 
@@ -28,3 +28,15 @@ class TileButton(QPushButton):
 
     def get_game(self):
         return self.game
+
+    def clear_style(self):
+        self.setStyleSheet("QPushButton {"
+                           "border: 1px solid lightgray;"
+                           f'background-color: rgb({self.color.red()}, {self.color.green()}, {self.color.blue()});'
+                           "}")
+
+    def set_style(self, color: QColor):
+        self.setStyleSheet("QPushButton {"
+                           "border: 1px solid lightgray;"
+                           f'background-color: rgb({color.red()}, {color.green()}, {color.blue()});'
+                           "}")

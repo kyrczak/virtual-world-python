@@ -3,13 +3,12 @@ from PyQt5.QtGui import QColor
 from GameLogic.Organism import Organism
 from GameLogic.Plant import Plant
 from GameLogic.Systems.Point import Point
-from GameLogic.World import World
 
 
 class Guarana(Plant):
     fruit_power = 3
 
-    def __int__(self, position: Point, world: World, power=0, age=0):
+    def __int__(self, position: Point, world, power=0, age=0):
         super(Guarana, self).__init__(position, power, age, world)
 
     def get_sign(self):

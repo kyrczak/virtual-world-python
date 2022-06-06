@@ -7,7 +7,7 @@ from GameLogic.Plant import Plant
 
 
 class Turtle(Animal):
-    def __init__(self, position, world, power=2, initiative=1, age=0):
+    def __init__(self, position, world, power=2, age=0, initiative=1):
         super(Turtle, self).__init__(position, power, initiative, age, world)
 
     def get_sign(self):
@@ -44,8 +44,8 @@ class Turtle(Animal):
                         self.set_position(proposed_position)
 
     def collision(self, attacker):
-        if attacker.get_power < 5:
-            self.get_world().add_activity("Turtle blocked attack from "+attacker.get_power())
+        if attacker.get_power() < 5:
+            self.get_world().add_activity("Turtle blocked attack from "+attacker.get_name())
             return False
         else:
             return self.fight(attacker)

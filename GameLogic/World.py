@@ -1,6 +1,16 @@
 import secrets
-from GameLogic.Organism import Organism
+
+from GameLogic.Animals.Antelope import Antelope
+from GameLogic.Animals.Fox import Fox
+from GameLogic.Animals.Sheep import Sheep
+from GameLogic.Animals.Turtle import Turtle
+from GameLogic.Animals.Wolf import Wolf
 from GameLogic.Animals.Human import Human
+from GameLogic.Plants.Belladonna import Belladonna
+from GameLogic.Plants.Dandelion import Dandelion
+from GameLogic.Plants.Grass import Grass
+from GameLogic.Plants.Guarana import Guarana
+from GameLogic.Plants.Hogweed import Hogweed
 from GameLogic.Systems.Keys import Keys
 from GameLogic.Systems.Point import Point
 
@@ -52,12 +62,11 @@ class World:
         self.journal.append(activity)
 
     def add_awaiting_organisms(self):
-        if not self.to_add:
+        if self.to_add:
             for org in self.to_add:
                 self.organisms.append(org)
-            self.organisms.clear()
-        # TODO sort by initiative and age
-        self.get_organisms().sort()
+            self.to_add.clear()
+        self.organisms.sort(key=lambda x: (x.initiative, x.age))
 
     def sort_organism(self):
         for org in self.organisms:
@@ -65,7 +74,7 @@ class World:
                 if isinstance(org, Human):
                     self.is_human_alive = False
                 self.to_remove.append(org)
-        if not self.to_remove:
+        if self.to_remove:
             for org in self.to_remove:
                 self.organisms.remove(org)
             self.to_remove.clear()
@@ -77,10 +86,24 @@ class World:
                 return org
         return None
 
+    def draw_game(self):
+        self.clear_board()
+        for organism in self.get_organisms():
+            if organism.is_alive:
+                organism.draw()
+        # self.show_organisms_list()
+        self.draw_board()
+        print("\n")
+
+    def show_organisms_list(self):
+        for organism in self.get_organisms():
+            print(organism.get_name() + "Initiative - " + organism.get_initiative() + " Age - " + organism.get_age() + "Position x : y " + organism.get_position())
+
     def next_turn(self):
         for org in self.get_organisms():
             if org.is_alive:
                 org.action()
+        # self.draw_game()
         self.sort_organism()
         self.increase_turn()
 
@@ -103,14 +126,25 @@ class World:
         amount_of_organisms = self.get_width()+self.get_height()
         x = secrets.randbelow(self.get_width())
         y = secrets.randbelow(self.get_height())
-        self.add_organism(Human())
+        self.add_organism(Human(Point(x, y), self))
         for i in range(amount_of_organisms):
             x = secrets.randbelow(self.get_width())
             y = secrets.randbelow(self.get_height())
             if self.get_organism(Point(x, y)) is None:
                 which_organism = secrets.randbelow(11)
-                # TODO switch with all organisms
-
+                match which_organism:
+                    case 0: self.add_organism(Sheep(Point(x, y), self))
+                    case 1: self.add_organism(Wolf(Point(x, y), self))
+                    case 2: self.add_organism(Fox(Point(x, y), self))
+                    case 3: self.add_organism(Antelope(Point(x, y), self))
+                    case 4: self.add_organism(Turtle(Point(x, y), self))
+                    case 5: self.add_organism(Grass(Point(x, y), self))
+                    case 6: self.add_organism(Dandelion(Point(x, y), self))
+                    case 7: self.add_organism(Guarana(Point(x, y), self))
+                    case 8: self.add_organism(Hogweed(Point(x, y), self))
+                    case 9: self.add_organism(Belladonna(Point(x, y), self))
+                    # TODO Add cybersheep
+                    case 10: pass
         self.sort_organism()
 
     def get_human_alive(self):

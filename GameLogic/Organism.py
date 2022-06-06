@@ -1,19 +1,18 @@
 import secrets
 from PyQt5.QtGui import QColor
 from GameLogic.Systems.Point import Point
-from GameLogic.World import World
 
 
 class Organism:
     age = 0
     power = 0
     initiative = 0
-    world: World = None
+    world = None
     position = None
     is_alive = True
     color = QColor(255, 255, 255)
 
-    def __init__(self, position: Point, world: World, power=0, initiative=0, age=0):
+    def __init__(self, position, world, power=0, initiative=0, age=0):
         self.position = position
         self.power = power
         self.initiative = initiative
@@ -72,7 +71,7 @@ class Organism:
 
     def choose_free_position(self, empty_positions):
         if empty_positions:
-            random_number = secrets.randbelow(empty_positions.len())
+            random_number = secrets.randbelow(len(empty_positions))
             position = Point(empty_positions[random_number].get_x(), empty_positions[random_number].get_y())
             return position
         else:

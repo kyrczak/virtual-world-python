@@ -4,11 +4,10 @@ from GameLogic.Animal import Animal
 from GameLogic.Organism import Organism
 from GameLogic.Plant import Plant
 from GameLogic.Systems.Point import Point
-from GameLogic.World import World
 
 
 class Hogweed(Plant):
-    def __int__(self, position: Point, world: World, power=10, age=0):
+    def __int__(self, position: Point, world, power=10, age=0):
         super(Hogweed, self).__init__(position, power, age, world)
 
     def get_sign(self):

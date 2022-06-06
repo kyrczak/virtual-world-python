@@ -2,11 +2,10 @@ import secrets
 from GameLogic.Organism import Organism
 from GameLogic.Plant import Plant
 from GameLogic.Systems.Point import Point
-from GameLogic.World import World
 
 
 class Animal(Organism):
-    def __init__(self, position: Point, power, initiative, age, world: World):
+    def __init__(self, position: Point, power, initiative, age, world):
         super(Animal, self).__init__(position, world, power, initiative, age)
         self.reproduction_chance = 14
 

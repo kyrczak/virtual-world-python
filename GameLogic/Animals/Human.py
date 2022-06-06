@@ -44,9 +44,9 @@ class Human(Animal):
         return QColor(0, 0, 255)
 
     def move(self):
-        key = self.get_world().get_key()
+        key :Keys = self.get_world().get_key()
         if key is not Keys.DEFAULT and key is not Keys.KEY_F:
-            proposed_position = self.proposed_position(key)
+            proposed_position = self.proposed_position(key.value)
             if self.is_in_bounds(proposed_position):
                 organism = self.get_world().get_organism(proposed_position)
                 if organism is None:

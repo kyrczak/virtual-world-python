@@ -12,7 +12,7 @@ class GameBoardPanel(QWidget):
         self.game = game
         self.layout = QGridLayout()
         self.layout.setSpacing(0)
-        self.size = 50
+        self.size = game.get_world().get_height()
 
         for i in range(self.size):
             for j in range(self.size):
