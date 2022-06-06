@@ -1,5 +1,5 @@
 import secrets
-
+from GameLogic.Organism import Organism
 from GameLogic.Animals.Human import Human
 from GameLogic.Systems.Keys import Keys
 from GameLogic.Systems.Point import Point
@@ -16,7 +16,7 @@ class World:
         self.organisms = []
         self.to_add = []
         self.to_remove = []
-        self.journal= []
+        self.journal = []
 
     def get_height(self):
         return self.height

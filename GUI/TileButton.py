@@ -9,7 +9,7 @@ class TileButton(QPushButton):
         super(TileButton, self).__init__()
         self.position = point
         self.game = game
-        self.color = QColor(255,255,255)
+        self.color = QColor(0xFFFFFF)
 
         self.setStyleSheet("QPushButton {"
                            "border: 1px solid lightgray;"
