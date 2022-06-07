@@ -45,7 +45,7 @@ class StartWindow(QWidget):
         self.setLayout(self.layout)
         self.setFixedSize(300, 150)
 
-    # TODO Load Game
+
     def load_game(self):
         file_name = QFileDialog.getOpenFileName(self)
         print(file_name[0])

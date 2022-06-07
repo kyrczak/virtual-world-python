@@ -1,6 +1,7 @@
 import secrets
 
 from GameLogic.Animals.Antelope import Antelope
+from GameLogic.Animals.Cybersheep import Cybersheep
 from GameLogic.Animals.Fox import Fox
 from GameLogic.Animals.Sheep import Sheep
 from GameLogic.Animals.Turtle import Turtle
@@ -91,7 +92,6 @@ class World:
         for organism in self.get_organisms():
             if organism.is_alive:
                 organism.draw()
-        # self.show_organisms_list()
         self.draw_board()
         print("\n")
 
@@ -143,8 +143,7 @@ class World:
                     case 7: self.add_organism(Guarana(Point(x, y), self))
                     case 8: self.add_organism(Hogweed(Point(x, y), self))
                     case 9: self.add_organism(Belladonna(Point(x, y), self))
-                    # TODO Add cybersheep
-                    case 10: pass
+                    case 10: self.add_organism(Cybersheep(Point(x, y), self))
         self.sort_organism()
 
     def get_human_alive(self):

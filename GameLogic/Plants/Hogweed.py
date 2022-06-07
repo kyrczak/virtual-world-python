@@ -1,6 +1,7 @@
 from PyQt5.QtGui import QColor
 
 from GameLogic.Animal import Animal
+import GameLogic.Animals.Cybersheep
 from GameLogic.Organism import Organism
 from GameLogic.Plant import Plant
 from GameLogic.Systems.Point import Point
@@ -28,9 +29,13 @@ class Hogweed(Plant):
         self.set_age(self.get_age() + 1)
 
     def collision(self, attacker: Organism):
-        # TODO Add Cyber-Sheep exception
-        attacker.set_alive(False)
-        return False
+        if isinstance(attacker,GameLogic.Animals.Cybersheep.Cybersheep):
+            self.set_alive(False)
+            self.get_world().add_activity("Cybersheep killed Hogweed")
+            return True
+        else:
+            attacker.set_alive(False)
+            return False
 
     def kill_around(self):
         positions_around = [
@@ -40,9 +45,10 @@ class Hogweed(Plant):
             Point(self.get_position().get_x()-1, self.get_position().get_y())
         ]
         for position in positions_around:
-            if self.get_world().get_organism(position) is not None and self.is_in_bounds(position):
-                if self.is_animal(self.get_world().get_organism(position)):
-                    self.get_world().get_organism(position).set_alive(False)
+            organism = self.get_world().get_organism(position)
+            if organism is not None and self.is_in_bounds(position):
+                if self.is_animal(organism) and isinstance(organism, GameLogic.Animals.Cybersheep.Cybersheep) is False:
+                    organism.set_alive(False)
 
     def is_animal(self, organism: Organism):
         return isinstance(organism, Animal)
