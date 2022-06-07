@@ -1,3 +1,5 @@
+import pathlib
+
 import GUI.GameWindow
 from GUI.TileButton import TileButton
 from GameLogic.Animals.Antelope import Antelope
@@ -32,7 +34,8 @@ class Game:
         self.get_world().set_key(Keys.DEFAULT)
 
     def save_game(self, text):
-        save = open(rf'C:\Users\pat20\PycharmProjects\virtua-world-python\saves\{text}.txt', "x")
+        path = pathlib.Path().resolve()
+        save = open(rf'{path}\saves\{text}.txt', "x")
         save.write(self.world.get_name()+" "+str(self.world.get_width())+" "+str(self.world.get_height())+" "+str(len(self.world.get_organisms()))+" \n")
         for organism in self.get_world().get_organisms():
             if isinstance(organism, Human):

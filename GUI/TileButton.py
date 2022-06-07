@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
+
+from GUI.OrganismsMenu import OrganismsMenu
 from GameLogic.Systems import *
 
 
@@ -10,6 +12,7 @@ class TileButton(QPushButton):
         self.position = point
         self.game = game
         self.color = QColor(0xFFFFFF)
+        self.window = None
         self.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.setStyleSheet("QPushButton {"
                            "border: 1px solid lightgray;"
@@ -22,6 +25,8 @@ class TileButton(QPushButton):
     # TODO Adding organisms
     def on_click(self):
         print(self.position)
+        if self.get_game().get_world().get_organism(self.position) is None:
+            self.window = OrganismsMenu(self.position, self.game)
 
     def get_position(self):
         return self.position
