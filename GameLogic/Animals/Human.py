@@ -14,7 +14,7 @@ class Human(Animal):
 
     def __init__(self, position, world, power=5, initiative=4, age=0, ability_cooldown=5, ability_time=5, is_ability_active=False):
         super(Human, self).__init__(position, power, initiative, age, world)
-        self.is_ability_active=is_ability_active
+        self.is_ability_active = is_ability_active
         self.ability_cooldown = ability_cooldown
         self.ability_time = ability_time
         self.world.is_human_alive = True

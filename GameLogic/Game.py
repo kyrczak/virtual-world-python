@@ -44,7 +44,6 @@ class Game:
                 save.write(organism.get_name() + " " + str(organism.get_position().get_x()) + " " + str(organism.get_position().get_y()) + " " + str(organism.get_power()) + " " +str(organism.get_initiative()) + " " +str(organism.get_age())+" \n")
         save.close()
 
-    # TODO Load Game
     def load_game(self, path):
         file = open(path, "r")
         world_line = file.readline()

@@ -3,7 +3,6 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
 from GUI.OrganismsMenu import OrganismsMenu
-from GameLogic.Systems import *
 
 
 class TileButton(QPushButton):
@@ -22,7 +21,6 @@ class TileButton(QPushButton):
         self.clicked.connect(self.on_click)
         self.setToolTip(str(self.position))
 
-    # TODO Adding organisms
     def on_click(self):
         print(self.position)
         if self.get_game().get_world().get_organism(self.position) is None:
