@@ -1,6 +1,7 @@
 import GUI.GameWindow
 from GUI.TileButton import TileButton
 from GameLogic.Animals.Antelope import Antelope
+from GameLogic.Animals.Cybersheep import Cybersheep
 from GameLogic.Animals.Fox import Fox
 from GameLogic.Animals.Human import Human
 from GameLogic.Animals.Sheep import Sheep
@@ -62,6 +63,10 @@ class Game:
                     new_world.add_organism(
                         Sheep(Point(int(elements[1]), int(elements[2])), new_world, int(elements[3]), int(elements[4]),
                              int(elements[5])))
+                case "Cybersheep":
+                    new_world.add_organism(
+                        Cybersheep(Point(int(elements[1]), int(elements[2])), new_world, int(elements[3]), int(elements[4]),
+                              int(elements[5])))
                 case "Fox":
                     new_world.add_organism(
                         Fox(Point(int(elements[1]), int(elements[2])), new_world, int(elements[3]), int(elements[4]),
